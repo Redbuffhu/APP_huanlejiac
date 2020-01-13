@@ -1,12 +1,17 @@
 # -*- coding=utf-8 -*-
-import os
-import sys
-import pytest
-import allure
-sys.path.append(os.getcwd())
+
+import os, sys
+sys.path.append(os.getcwd())  # 告诉pytest运行前先检索当前路径
 from Basic.Init_Driver import init_hlj_driver
 from Basic.read_data import Read_Data
 from Page.search_page import Search_Page
+import pytest
+import allure
+
+
+"""
+allure generate report/ -o report/html
+"""
 
 
 def package_param_data():
@@ -25,7 +30,7 @@ def package_param_data():
     return list_data
 
 
-# print(sys.path)
+print(sys.path)
 package_param_data()
 
 
@@ -36,8 +41,11 @@ class Test_Search(object):
         希望函数运行多次，但不希望每次运行都初始化和退出
 
     """
+
     # def __init__(self):
     #         self.driver = init_hlj_driver()
+    #         sp = Search_Page(self.driver)
+    #         sp.jump_guide()
 
     def setup_class(self):
         self.driver = init_hlj_driver()
@@ -60,7 +68,6 @@ class Test_Search(object):
     @allure.severity(allure.severity_level.BLOCKER)
     @allure.step("主页：楼盘测试")
     def test_index_lp(self):
-
         assert 0
 
     def teardown_class(self):
@@ -70,4 +77,3 @@ class Test_Search(object):
 
 if __name__ == "__main__":
     Test_Search().test_search(11, "H")
-

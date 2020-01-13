@@ -1,13 +1,14 @@
 # -*- coding=utf-8 -*-
 # 存储封装页面文件
+import time
 import Page
-from Basic.Base import Base
+from Basic.action import ElementActions
 
 
-class Search_Page(Base):
+class Search_Page(ElementActions):
 
     def __init__(self, driver):
-        Base.__init__(self, driver)  # Base类的初始化方法
+        ElementActions.__init__(self, driver)  # Base类的初始化方法
 
     def jump_guide(self):
         # 跳过引导页
@@ -25,6 +26,8 @@ class Search_Page(Base):
         self.input_text(Page.search_text_box, text)
         # 点击确认按钮
         self.click_element(Page.search_confirm_button)
+        time.sleep(0.3)
+        self.get_img()
         # 返回到首页
         self.click_element(Page.search_text_back)
         self.click_element(Page.search_back)
